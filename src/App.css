@@ -4,32 +4,32 @@
   color: #111827;
 }
 
-.appShell {
+.app-shell {
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 24px;
 }
 
-.appShell h1 {
+.app-shell h1 {
   margin: 0 0 12px;
   font-size: 32px;
   line-height: 1.2;
 }
 
-.appShell p {
+.app-shell p {
   margin: 0;
   font-size: 16px;
   color: #4b5563;
 }
 
-.appNav {
+.app-nav {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 24px;
 }
 
-.appNav a {
+.app-nav-button {
   display: inline-flex;
   align-items: center;
   min-height: 40px;
@@ -38,9 +38,10 @@
   border-radius: 8px;
   color: #111827;
   background: #ffffff;
-  text-decoration: none;
+  font: inherit;
+  cursor: pointer;
 }
 
-.appNav a:hover {
+.app-nav-button:hover {
   background: #f3f4f6;
 }
