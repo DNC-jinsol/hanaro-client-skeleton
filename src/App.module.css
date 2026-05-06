@@ -1,0 +1,46 @@
+.app {
+  min-height: 100vh;
+  background: #f6f8fb;
+  color: #111827;
+}
+
+.appShell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+.appShell h1 {
+  margin: 0 0 12px;
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+.appShell p {
+  margin: 0;
+  font-size: 16px;
+  color: #4b5563;
+}
+
+.appNav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.appNav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  color: #111827;
+  background: #ffffff;
+  text-decoration: none;
+}
+
+.appNav a:hover {
+  background: #f3f4f6;
+}
