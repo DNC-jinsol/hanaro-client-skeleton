@@ -1,9 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import {
-  insertSampleCustomer,
-  type InsertSampleCustomerRequest,
-} from '../../api/sample/insertCustomer'
+import { insertSampleCustomer } from '../../api/sample/insertCustomer'
+import type { InsertSampleCustomerRequest } from '../../api/sample/types'
 import { SAMPLE_CUSTOMERS_QUERY_KEY } from './useSampleCustomersQuery'
 
 export function useInsertSampleCustomerMutation() {

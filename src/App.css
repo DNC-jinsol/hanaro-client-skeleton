@@ -72,6 +72,27 @@
   background: #1d4ed8;
 }
 
+.app-polling-status {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid #bfdbfe;
+  border-radius: 12px;
+  background: #eff6ff;
+}
+
+.app-polling-status strong {
+  font-size: 15px;
+  color: #1d4ed8;
+}
+
+.app-polling-status span {
+  font-size: 14px;
+  color: #1f2937;
+}
+
 .app-result {
   margin-top: 24px;
   padding: 20px;

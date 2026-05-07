@@ -1,14 +1,14 @@
 import { post } from '../client'
-
-export type InsertSampleCustomerRequest = {
-  name: string
-  email: string
-  city: string
-  status: string
-}
+import type {
+  InsertSampleCustomerRequest,
+  InsertSampleCustomerResponse,
+} from './types'
 
 export async function insertSampleCustomer(
   payload: InsertSampleCustomerRequest,
-): Promise<unknown> {
-  return post<InsertSampleCustomerRequest, unknown>('/customers', payload)
+): Promise<InsertSampleCustomerResponse> {
+  return post<InsertSampleCustomerRequest, InsertSampleCustomerResponse>(
+    '/customers',
+    payload,
+  )
 }
