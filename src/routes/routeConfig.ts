@@ -1,7 +1,12 @@
 import { lazy } from 'react'
 import type { LazyExoticComponent } from 'react'
 
-export type RouteKey = 'home' | 'routeManagement' | 'sales' | 'crm'
+export type RouteKey =
+  | 'home'
+  | 'routeManagement'
+  | 'sales'
+  | 'crm'
+  | 'sample'
 
 type RouteComponent = LazyExoticComponent<() => React.JSX.Element>
 
@@ -47,6 +52,15 @@ export const APP_ROUTES: RouteItem[] = [
     Component: lazy(async () => {
       const module = await import('../pages/CrmPage')
       return { default: module.CrmPage }
+    }),
+  },
+  {
+    key: 'sample',
+    path: '/sample',
+    label: '샘플 API',
+    Component: lazy(async () => {
+      const module = await import('../pages/SampleApiPage')
+      return { default: module.SampleApiPage }
     }),
   },
 ]
