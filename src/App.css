@@ -29,6 +29,16 @@
   margin-top: 24px;
 }
 
+.app-nav-wrap {
+  margin-top: 24px;
+}
+
+.app-nav-status {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: #374151;
+}
+
 .app-nav-button {
   display: inline-flex;
   align-items: center;
@@ -44,6 +54,39 @@
 
 .app-nav-button:hover {
   background: #f3f4f6;
+}
+
+.app-nav-button-active {
+  border-color: #2563eb;
+  color: #ffffff;
+  background: #2563eb;
+}
+
+.app-shared-state {
+  margin-top: 20px;
+  padding: 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.app-shared-state h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+.app-shared-state p {
+  margin: 0 0 8px;
+}
+
+.app-shared-state strong {
+  color: #2563eb;
+}
+
+.app-shared-state-caption {
+  font-size: 14px;
+  color: #6b7280;
 }
 
 .app-actions {

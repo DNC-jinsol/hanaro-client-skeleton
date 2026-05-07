@@ -1,4 +1,5 @@
 import { AppNav } from '../components/AppNav'
+import { SelectedDomainStatus } from '../components/SelectedDomainStatus'
 import { ApiError } from '../api/client'
 import { useInsertSampleCustomerMutation } from '../queries/sample/useInsertSampleCustomerMutation'
 import { useSampleCustomersQuery } from '../queries/sample/useSampleCustomersQuery'
@@ -24,6 +25,7 @@ export function SampleApiPage() {
         <h1>샘플 API 테스트</h1>
         <p>`GET /customers` 호출 결과를 확인하는 테스트 페이지입니다.</p>
         <AppNav />
+        <SelectedDomainStatus />
         <div className="app-actions">
           <button
             type="button"

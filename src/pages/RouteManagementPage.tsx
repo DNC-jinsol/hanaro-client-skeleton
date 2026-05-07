@@ -1,4 +1,5 @@
 import { AppNav } from '../components/AppNav'
+import { SelectedDomainStatus } from '../components/SelectedDomainStatus'
 
 export function RouteManagementPage() {
   return (
@@ -7,6 +8,7 @@ export function RouteManagementPage() {
         <h1>동선관리</h1>
         <p>동선관리 도메인 placeholder 페이지입니다.</p>
         <AppNav />
+        <SelectedDomainStatus />
       </section>
     </main>
   )

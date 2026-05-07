@@ -20,6 +20,7 @@
 - Vite
 - React Router DOM
 - TanStack Query
+- Zustand
 - Axios
 
 ## 3. 현재 구현 범위
@@ -31,6 +32,7 @@
 - 도메인별 placeholder 페이지
 - `routeConfig.ts` 기반 라우트 설정 관리
 - `AppNav` 기반 공통 이동 버튼
+- Zustand 기반 전역 상태 샘플 적용
 - Axios 기반 공통 API client
 - TanStack Query `QueryClientProvider` 연결
 - Query key 작성 규칙 초안
@@ -64,6 +66,7 @@ src/
     AppRouter.tsx
   components/
     AppNav.tsx
+    SelectedDomainStatus.tsx
   lib/
     QueryClient.ts
   pages/
@@ -79,6 +82,8 @@ src/
       useInsertSampleCustomerMutation.ts
   routes/
     routeConfig.ts
+  store/
+    appStore.ts
   App.css
   App.tsx
   index.css
@@ -113,6 +118,13 @@ src/
 - 공통 내비게이션 버튼 컴포넌트
 - `APP_ROUTES`를 기반으로 메인 / 동선관리 / 영업관리 / 마케팅 CRM / 샘플 API 버튼을 출력
 - 버튼 클릭 시 `navigate()`로 이동
+- 현재 URL과 Zustand store의 선택 도메인 키를 동기화
+- 현재 선택된 도메인 버튼에 active 스타일 적용
+
+### `src/components/SelectedDomainStatus.tsx`
+
+- Zustand store에 저장된 현재 선택 도메인 상태를 화면에 표시
+- `AppNav`와 별도 컴포넌트가 같은 전역 상태를 동시에 읽고 있다는 점을 시각적으로 확인하는 용도
 
 ### `src/api/client.ts`
 
@@ -138,6 +150,14 @@ src/
   - 배열 형태 사용
   - `domain -> resource -> view -> identifier/filter`
   - 목록은 `list`, 단건은 `detail`
+
+### `src/store/appStore.ts`
+
+- Zustand 기반 전역 상태 store
+- 현재는 스켈레톤 검증 목적의 최소 상태만 관리
+  - `selectedDomainKey`
+  - `setSelectedDomainKey`
+- 서버 상태는 TanStack Query가 맡고, 전역 UI 상태는 Zustand가 맡는 역할 분리 예시로 사용
 
 ## 7. 샘플 API 테스트 흐름
 
@@ -192,7 +212,23 @@ VITE_API_BASE_URL=http://localhost:8080
 
 프론트 API 호출은 기본적으로 이 주소를 기준으로 동작합니다.
 
-## 10. 실행 방법
+## 10. Zustand 적용 범위
+
+현재 스켈레톤에는 Vue.js의 Vuex와 유사한 역할을 하는 전역 상태관리 예시로 Zustand를 최소 범위만 도입했습니다.
+
+현재 store에서 검증하는 항목:
+
+- 현재 선택된 도메인 키
+
+현재 확인 가능한 동작:
+
+- `AppNav`에서 버튼을 클릭하면 선택된 도메인 키가 전역 store에 저장됨
+- 각 페이지에 배치된 `SelectedDomainStatus`가 같은 값을 즉시 읽어 표시함
+- 하나의 상태값이 여러 컴포넌트에서 공유된다는 점을 화면에서 직접 확인 가능
+
+현재 단계에서는 서버 응답 데이터는 Zustand에 저장하지 않으며, 계속 TanStack Query가 담당합니다.
+
+## 11. 실행 방법
 
 ### 의존성 설치
 
@@ -208,7 +244,7 @@ npm run dev
 
 기본적으로 Vite 개발 서버는 `5173` 포트를 사용합니다.
 
-## 11. 샘플 API 테스트 서버
+## 12. 샘플 API 테스트 서버
 
 현재 샘플 API 페이지는 별도 테스트 서버와 연동됩니다.
 
@@ -222,12 +258,13 @@ npm run dev
 
 프론트 `/sample` 페이지를 검증하려면 테스트 서버가 실행 중이어야 합니다.
 
-## 12. 스켈레톤 범위와 보류한 항목
+## 13. 스켈레톤 범위와 보류한 항목
 
 현재 스켈레톤은 아래까지를 범위로 봅니다.
 
 - 공통 기술 스택
 - 라우팅 구조
+- Zustand 기반 전역 UI 상태 샘플
 - 공통 API client
 - Query 연결 구조
 - 샘플 조회/등록 흐름
@@ -240,9 +277,10 @@ npm run dev
 - 디자인 시스템
 - 전역 로딩 UX 방식
 - 실제 도메인별 API 명세
-- 상태관리 라이브러리 확정
+- 도메인별 전역 상태 구조 확정
+- Zustand persist/devtools 적용 여부
 
-## 13. 현재 코드 패턴 요약
+## 14. 현재 코드 패턴 요약
 
 실서비스 구현 시 현재 스켈레톤은 아래 패턴을 기준으로 확장하는 것을 권장합니다.
 
@@ -251,9 +289,10 @@ npm run dev
 3. 화면은 `src/pages` 아래에 위치
 4. API 호출 함수는 `src/api/<domain>` 아래에 위치
 5. TanStack Query 훅은 `src/queries/<domain>` 아래에 위치
-6. API 응답/요청 타입은 `src/api/<domain>/types.ts`에 위치
+6. 전역 UI 상태는 `src/store` 아래에 위치
+7. API 응답/요청 타입은 `src/api/<domain>/types.ts`에 위치
 
-## 14. 현재 상태 요약
+## 15. 현재 상태 요약
 
 이 저장소는 “실서비스 구현 전 검증 가능한 프론트엔드 스켈레톤” 수준까지 정리된 상태입니다.
 
@@ -263,5 +302,6 @@ npm run dev
 - lazy loading 구조
 - Axios 공통 client
 - TanStack Query 조회/등록 패턴
+- Zustand 전역 상태 공유 패턴
 - 서버 데이터 재조회 흐름
 - 샘플 API를 통한 실제 백엔드 연동

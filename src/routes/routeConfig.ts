@@ -66,3 +66,7 @@ export const APP_ROUTES: RouteItem[] = [
 ]
 
 export const HOME_ROUTE = APP_ROUTES[0]
+
+export function findRouteByPath(pathname: string): RouteItem | undefined {
+  return APP_ROUTES.find((route) => route.path === pathname)
+}

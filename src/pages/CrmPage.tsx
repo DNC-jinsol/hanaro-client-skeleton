@@ -1,4 +1,5 @@
 import { AppNav } from '../components/AppNav'
+import { SelectedDomainStatus } from '../components/SelectedDomainStatus'
 
 export function CrmPage() {
   return (
@@ -7,6 +8,7 @@ export function CrmPage() {
         <h1>마케팅 CRM</h1>
         <p>마케팅 CRM 도메인 placeholder 페이지입니다.</p>
         <AppNav />
+        <SelectedDomainStatus />
       </section>
     </main>
   )
